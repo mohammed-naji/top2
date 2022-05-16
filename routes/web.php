@@ -20,3 +20,8 @@ Route::get('/', function () {
 Route::get('new', function() {
     return 'new';
 });
+
+
+Route::get('new2', function() {
+    return 'new2';
+});
