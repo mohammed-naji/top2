@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SiteController;
 
 /*
 Route::get('url', 'action);
@@ -9,14 +10,15 @@ Route::put('url', 'action);
 Route::patch('url', 'action);
 Route::delete('url', 'action);
 */
-
+/*
 Route::get('/', function() {
-    return 'Homepage';
+    // return url('/about');
+    return route('aboutpage');
 })->name('mainpage');
 
 Route::get('/about', function() {
     return 'About Us Page';
-});
+})->name('aboutpage');
 
 Route::get('news/{id}', function($id) {
     return 'News #'.$id;
@@ -46,3 +48,25 @@ Route::prefix('admin')->group(function() {
     Route::get('/comments', function() {});
 });
 
+// get, post, (put, patch), delete
+Route::get('profile', function() {
+    echo "Welcome Mohammed<br>";
+    echo "Your Email: moh@gmail.com<br>";
+    echo "Your Age: 28<br>";
+});
+*/
+
+
+Route::get('/', [SiteController::class, 'index'])->name('home');
+
+Route::get('/about', [SiteController::class, 'about'])->name('about');
+
+Route::get('/team', [SiteController::class, 'team'])->name('team');
+
+Route::get('/services', [SiteController::class, 'services'])->name('services');
+
+Route::get('/contact', [SiteController::class, 'contact'])->name('contact');
+
+Route::get('/user/{name}', [SiteController::class, 'user'])->name('user');
+
+Route::get('/postsssssssss/nrhnrhrghy/gufdgdfgsjsafg/{user}/comments/{id}', [SiteController::class, 'posts'])->name('posts');
