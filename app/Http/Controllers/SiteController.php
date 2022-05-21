@@ -8,11 +8,6 @@ class SiteController extends Controller
 {
     public function index()
     {
-        $user = 'ali';
-        $id = 15;
-
-        // return url('post/'.$user.'/comments/'.$id);
-        // return route('posts', [$user, $id]);
         return view('welcome');
     }
 

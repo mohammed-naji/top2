@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Site1Controller;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SiteController;
 
@@ -57,16 +58,27 @@ Route::get('profile', function() {
 */
 
 
-Route::get('/', [SiteController::class, 'index'])->name('home');
+// Route::get('/', [SiteController::class, 'index'])->name('home');
 
-Route::get('/about', [SiteController::class, 'about'])->name('about');
+// Route::get('/about', [SiteController::class, 'about'])->name('about');
 
-Route::get('/team', [SiteController::class, 'team'])->name('team');
+// Route::get('/team', [SiteController::class, 'team'])->name('team');
 
-Route::get('/services', [SiteController::class, 'services'])->name('services');
+// Route::get('/services', [SiteController::class, 'services'])->name('services');
 
-Route::get('/contact', [SiteController::class, 'contact'])->name('contact');
+// Route::get('/contact', [SiteController::class, 'contact'])->name('contact');
 
-Route::get('/user/{name}', [SiteController::class, 'user'])->name('user');
+// Route::get('/user/{name}', [SiteController::class, 'user'])->name('user');
 
-Route::get('/postsssssssss/nrhnrhrghy/gufdgdfgsjsafg/{user}/comments/{id}', [SiteController::class, 'posts'])->name('posts');
+// Route::get('/postsssssssss/nrhnrhrghy/gufdgdfgsjsafg/{user}/comments/{id}', [SiteController::class, 'posts'])->name('posts');
+
+
+Route::get('/', [Site1Controller::class, 'index'])->name('index');
+
+Route::get('/about-me', [Site1Controller::class, 'about'])->name('about');
+
+Route::get('/post', [Site1Controller::class, 'post'])->name('post');
+
+Route::get('/contact-me', [Site1Controller::class, 'contact'])->name('contact');
+
+Route::post('/contact', [Site1Controller::class, 'contact_data'])->name('contact_data');
