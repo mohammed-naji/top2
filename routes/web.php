@@ -114,4 +114,9 @@ Route::get('form4', [FormsController::class, 'form4'])->name('form4');
 Route::post('form4', [FormsController::class, 'form4_data'])->name('form4_data');
 
 
-Route::get('posts', [Postscontroller::class, 'index']);
+Route::get('posts', [Postscontroller::class, 'index'])->name('posts.index');
+
+Route::get('posts/create', [Postscontroller::class, 'create'])->name('posts.create');
+Route::post('posts/store', [Postscontroller::class, 'store'])->name('posts.store');
+
+Route::delete('posts/{id}', [Postscontroller::class, 'destroy'])->name('posts.destroy');
