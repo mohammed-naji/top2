@@ -12,24 +12,16 @@
 
     <div class="container my-5">
         <div class="d-flex justify-content-between align-items-center">
-            <h1>Add New Post</h1>
+            <h1>Edit Post : <span>{{ $post->title }}</span></h1>
             <a href="{{ route('posts.index') }}" class="btn btn-dark w-25">All Posts</a>
         </div>
 
-        {{-- @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif --}}
-        <form action="{{ route('posts.store') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('posts.update', $post->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
+            @method('put')
             <div class="mb-3">
                 <label>Title</label>
-                <input type="text" name="title" placeholder="Title" class="form-control @error('title') is-invalid @enderror" value="{{ old('title') }}" />
+                <input type="text" name="title" placeholder="Title" class="form-control @error('title') is-invalid @enderror" value="{{ old('title', $post->title) }}" />
                 @error('title')
                     <small class="invalid-feedback">{{ $message }}</small>
                 @enderror
@@ -37,20 +29,21 @@
 
             <div class="mb-3">
                 <label>Image</label>
-                <input type="file" name="image" class="form-control @error('image') is-invalid @enderror" />
+                <input type="file" name="image"  class="form-control @error('image') is-invalid @enderror" />
                 @error('image')
                     <small class="invalid-feedback">{{ $message }}</small>
                 @enderror
+                <img width="80" src="{{ asset('uploads/'.$post->image) }}" alt="">
             </div>
 
             <div class="mb-3">
                 <label>Body</label>
-                <textarea name="body" placeholder="Body" class="form-control @error('body') is-invalid @enderror" rows="6">{{ old('body') }}</textarea>
+                <textarea name="body" placeholder="Body" class="form-control @error('body') is-invalid @enderror" rows="6">{{ old('body', $post->body) }}</textarea>
                 @error('body')
                     <small class="invalid-feedback">{{ $message }}</small>
                 @enderror
             </div>
-            <button class="btn btn-success px-5">Add</button>
+            <button class="btn btn-info px-5">Update</button>
         </form>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/6.1.0/tinymce.min.js" integrity="sha512-dr3qAVHfaeyZQPiuN6yce1YuH7YGjtUXRFpYK8OfQgky36SUfTfN3+SFGoq5hv4hRXoXxAspdHw4ITsSG+Ud/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>

@@ -1,9 +1,11 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MailController;
+use App\Http\Controllers\SiteController;
+use App\Http\Controllers\TagsController;
 use App\Http\Controllers\FormsController;
 use App\Http\Controllers\Postscontroller;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\SiteController;
 use App\Http\Controllers\Site1Controller;
 use App\Http\Controllers\Site2Controller;
 
@@ -114,9 +116,17 @@ Route::get('form4', [FormsController::class, 'form4'])->name('form4');
 Route::post('form4', [FormsController::class, 'form4_data'])->name('form4_data');
 
 
-Route::get('posts', [Postscontroller::class, 'index'])->name('posts.index');
+// Route::get('posts', [Postscontroller::class, 'index'])->name('posts.index');
 
-Route::get('posts/create', [Postscontroller::class, 'create'])->name('posts.create');
-Route::post('posts/store', [Postscontroller::class, 'store'])->name('posts.store');
+// Route::get('posts/create', [Postscontroller::class, 'create'])->name('posts.create');
+// Route::post('posts/store', [Postscontroller::class, 'store'])->name('posts.store');
 
-Route::delete('posts/{id}', [Postscontroller::class, 'destroy'])->name('posts.destroy');
+// Route::delete('posts/{id}', [Postscontroller::class, 'destroy'])->name('posts.destroy');
+
+// Route::get('posts/{id}/edit', [Postscontroller::class, 'edit'])->name('posts.edit');
+// Route::put('posts/{id}/update', [Postscontroller::class, 'update'])->name('posts.update');
+
+Route::resource('posts', Postscontroller::class);
+Route::resource('categories', TagsController::class);
+
+Route::get('send-mail', [MailController::class, 'send']);

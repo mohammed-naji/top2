@@ -56,12 +56,20 @@ class Postscontroller extends Controller
     {
         $request->validate([
             'title' => 'required|min:5|max:40',
-            'body' => 'required'
+            'body' => 'required',
+            'image' => 'required|image|mimes:png,jpg,jpeg'
         ]);
+
+        // Upload file
+        $img = $request->file('image');
+        $image_name = rand().'_'.time().'_'.$img->getClientOriginalName();
+        // rr.jpg => 6546545646_5466546548_rr.jpg
+        $img->move(public_path('uploads'), $image_name);
 
         Post::create([
             'title' => $request->title,
-            'body' => $request->body
+            'body' => $request->body,
+            'image' => $image_name
         ]);
 
         return redirect()->route('posts.index')->with('msg', 'Post added successfully')->with('type', 'success');
@@ -71,5 +79,38 @@ class Postscontroller extends Controller
     {
         Post::destroy($id);
         return redirect()->route('posts.index')->with('msg', 'Post delete successfully')->with('type', 'danger');
+    }
+
+    public function edit($id)
+    {
+        $post = Post::find($id);
+        return view('posts.edit', compact('post'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'title' => 'required|min:5|max:40',
+            'body' => 'required',
+            'image' => 'nullable|image|mimes:png,jpg,jpeg'
+        ]);
+
+        $post = Post::find($id);
+        $image_name = $post->image;
+
+        if($request->hasFile('image')) {
+            // Upload file
+            $img = $request->file('image');
+            $image_name = rand().'_'.time().'_'.$img->getClientOriginalName();
+            $img->move(public_path('uploads'), $image_name);
+        }
+
+        $post->update([
+            'title' => $request->title,
+            'body' => $request->body,
+            'image' => $image_name
+        ]);
+
+        return redirect()->route('posts.index')->with('msg', 'Post updated successfully')->with('type', 'info');
     }
 }
