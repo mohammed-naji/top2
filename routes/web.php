@@ -6,6 +6,7 @@ use App\Http\Controllers\SiteController;
 use App\Http\Controllers\TagsController;
 use App\Http\Controllers\FormsController;
 use App\Http\Controllers\Postscontroller;
+use App\Http\Controllers\RelationController;
 use App\Http\Controllers\Site1Controller;
 use App\Http\Controllers\Site2Controller;
 
@@ -130,3 +131,13 @@ Route::resource('posts', Postscontroller::class);
 Route::resource('categories', TagsController::class);
 
 Route::get('send-mail', [MailController::class, 'send']);
+
+Route::get('contact-us', [MailController::class, 'contact_us'])->name('contact_us');
+Route::post('contact-us', [MailController::class, 'contact_us_data'])->name('contact_us_data');
+
+
+Route::get('one-to-one', [RelationController::class, 'one_to_one']);
+Route::get('one-to-many', [RelationController::class, 'one_to_many']);
+Route::post('one-to-many', [RelationController::class, 'one_to_many_data'])->name('one_to_many_data');
+
+Route::get('many-to-many', [RelationController::class, 'many_to_many']);
